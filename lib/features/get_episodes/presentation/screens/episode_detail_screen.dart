@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../data/models/episode_manifest_model.dart';
@@ -242,7 +243,8 @@ class EpisodeDetailScreen extends ConsumerWidget {
               child: ElevatedButton.icon(
                 icon: const Icon(Icons.play_arrow),
                 label: const Text('Play Episode'),
-                onPressed: () {
+                onPressed: () {// Start Playing Episode
+                  // context.push('/episode/${episode.id}/opening');
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
@@ -288,7 +290,8 @@ class EpisodeDetailScreen extends ConsumerWidget {
               child: OutlinedButton.icon(
                 icon: const Icon(Icons.play_arrow),
                 label: const Text('Play Current Version'),
-                onPressed: () {
+                onPressed: () { // Start Playing Episode
+                  // context.push('/episode/${episode.id}/opening');
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
