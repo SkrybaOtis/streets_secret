@@ -1,0 +1,25 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'app.dart';
+import 'core/utils/logger_utils.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Set preferred orientations
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
+  // Initialize logger
+  AppLogger.init();
+
+  runApp(
+    const ProviderScope(
+      child: DetectiveGameApp(),
+    ),
+  );
+}

@@ -113,6 +113,7 @@ class AppException with _$AppException implements Exception {
       );
 
   /// Returns the original error if any
+  @override
   Object? get originalError => whenOrNull(
         fileNotFound: (_, error) => error,
         fileReadError: (_, error) => error,
