@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-// import '../../features/get_episodes/presentation/screens/episode_list_screen.dart';
-import '../../features/episode/presentation/screens/episode_list_screen.dart';
+import '../../features/get_episodes/presentation/screens/home_screen.dart';
+import '../../features/get_episodes/presentation/screens/episode_list_screen.dart';
+import '../../features/get_episodes/presentation/screens/episode_map_screen.dart';
+// import '../../features/episode/presentation/screens/episode_list_screen.dart';
 import '../../features/episode/presentation/screens/main_episode_screen.dart';
 import '../../features/episode/presentation/screens/opening_episode_screen.dart';
 import '../../features/location/presentation/screens/location_list_screen.dart';
@@ -23,13 +25,23 @@ part 'app_router.g.dart';
 @riverpod
 GoRouter appRouter(Ref ref) {
   return GoRouter(
-    initialLocation: RouteNames.episodeList,
+    initialLocation: RouteNames.homeScreen,
     debugLogDiagnostics: true,
     routes: [
+      GoRoute(
+        path: RouteNames.homeScreen,
+        name: 'homeScreen',
+        builder: (context, state) => const HomeScreen(),
+      ),
       GoRoute(
         path: RouteNames.episodeList,
         name: 'episodeList',
         builder: (context, state) => const EpisodeListScreen(),
+      ),
+      GoRoute(
+        path: RouteNames.episodeMap,
+        name: 'episodeMap',
+        builder: (context, state) => const EpisodeMapScreen(),
       ),
       GoRoute(
         path: RouteNames.openingEpisode,

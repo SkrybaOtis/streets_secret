@@ -19,7 +19,7 @@ sealed class UnlockedItems with _$UnlockedItems {
       _$UnlockedItemsFromJson(json);
   
     factory UnlockedItems.getUnlockedItemsFromJson(Map<String, dynamic> json){
-    // AppLogger.warning("UnlockedItems parsing started!!");
+    AppLogger.warning("UnlockedItems parsing started!!");
 
     UnlockedItems newUnlockedItems = UnlockedItems(
       characters: [], 

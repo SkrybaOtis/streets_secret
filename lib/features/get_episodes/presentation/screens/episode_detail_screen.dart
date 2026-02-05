@@ -11,7 +11,7 @@ import '../../domain/repositories/episode_repository.dart';
 import '../providers/episode_providers.dart';
 import '../widgets/download_progress_widget.dart';
 import '../widgets/episode_map_marker.dart';
-import 'game_screen.dart';
+// import 'game_screen.dart';
 
 class EpisodeDetailScreen extends ConsumerWidget {
   final EpisodeManifestModel episode;
@@ -244,13 +244,13 @@ class EpisodeDetailScreen extends ConsumerWidget {
                 icon: const Icon(Icons.play_arrow),
                 label: const Text('Play Episode'),
                 onPressed: () {// Start Playing Episode
-                  // context.push('/episode/${episode.id}/opening');
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => GameScreen(episodeId: episode.id),
-                    ),
-                  );
+                  context.pushReplacement('/episode/${episode.id}/opening');
+                  // Navigator.pushReplacement(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => GameScreen(episodeId: episode.id),
+                  //   ),
+                  // );
                 },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.all(16),
@@ -291,13 +291,13 @@ class EpisodeDetailScreen extends ConsumerWidget {
                 icon: const Icon(Icons.play_arrow),
                 label: const Text('Play Current Version'),
                 onPressed: () { // Start Playing Episode
-                  // context.push('/episode/${episode.id}/opening');
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => GameScreen(episodeId: episode.id),
-                    ),
-                  );
+                  context.pushReplacement('/episode/${episode.id}/opening');
+                  // Navigator.pushReplacement(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => GameScreen(episodeId: episode.id),
+                  //   ),
+                  // );
                 },
               ),
             ),

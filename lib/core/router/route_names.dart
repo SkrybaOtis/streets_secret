@@ -1,5 +1,7 @@
 abstract class RouteNames {
-  static const String episodeList = '/';
+  static const String homeScreen = '/';
+  static const String episodeList = '/list';
+  static const String episodeMap = '/map';
   static const String openingEpisode = '/episode/:episodeId/opening';
   static const String mainEpisode = '/episode/:episodeId';
   static const String locationList = '/episode/:episodeId/locations';
