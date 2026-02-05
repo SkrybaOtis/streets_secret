@@ -1,0 +1,77 @@
+name: streets_sercets
+description: "A new Flutter project."
+publish_to: 'none'  
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.7
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+
+  # Providers
+  flutter_riverpod: ^3.1.0
+  riverpod_annotation: ^4.0.0
+  riverpod_analyzer_utils: ^1.0.0-dev.8
+
+  # Networking
+  dio: ^5.9.0
+  connectivity_plus: ^7.0.0
+
+  # Maps
+  flutter_map: ^8.2.2
+  latlong2: ^0.9.1
+  geolocator: ^14.0.2
+
+  # Storage and Files
+  path_provider: ^2.1.5
+  shared_preferences: ^2.5.4
+  archive: ^4.0.7
+  
+  # Navigation screens
+  go_router: ^17.0.0
+
+  # Security
+  crypto: ^3.0.7
+
+  # UI
+  shimmer: ^3.0.0
+  cached_network_image: ^3.4.1
+
+  # Utils
+  freezed_annotation: ^3.1.0
+  json_annotation: ^4.9.0
+  collection: ^1.19.1
+  permission_handler: ^12.0.1
+  convert: ^3.1.2
+  logger: ^2.6.2
+  equatable: ^2.0.8
+  intl: ^0.20.2
+
+  # QR
+  mobile_scanner: ^7.0.0
+
+  # URL Launcher
+  url_launcher: ^6.3.2
+
+  # Test
+  analyzer: ^8.4.1
+
+
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+
+  build_runner: ^2.10.5
+  freezed: ^3.2.3
+  json_serializable: ^6.11.1
+  riverpod_generator: ^4.0.0+1
