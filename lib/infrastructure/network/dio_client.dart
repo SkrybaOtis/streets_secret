@@ -89,16 +89,25 @@ class DioClient {
       DioExceptionType.connectionTimeout ||
       DioExceptionType.sendTimeout ||
       DioExceptionType.receiveTimeout =>
-        NetworkException('Connection timed out', e.response?.statusCode, e),
+        NetworkException(
+          message: 'Connection timed out', 
+          statusCode: e.response?.statusCode, 
+          originalError: e),
       DioExceptionType.badResponse =>
         NetworkException(
-          'Server error: ${e.response?.statusCode}',
-          e.response?.statusCode,
-          e,
+          message: 'Server error: ${e.response?.statusCode}',
+          statusCode: e.response?.statusCode,
+          originalError: e,
         ),
       DioExceptionType.connectionError =>
-        NetworkException('No internet connection', null, e),
-      _ => NetworkException('Network error occurred', null, e),
+        NetworkException(
+          message: 'No internet connection', 
+          statusCode: null, 
+          originalError: e),
+      _ => NetworkException(
+          message: 'Network error occurred', 
+          statusCode: null, 
+          originalError: e),
     };
   }
 }

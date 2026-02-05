@@ -106,16 +106,16 @@ class DownloadService {
         ));
       } else {
         controller.addError(DownloadException(
-          'Failed to download episode',
-          episode.id,
-          e,
+          message: 'Failed to download episode',
+          episodeId: episode.id,
+          originalError: e,
         ));
       }
     } catch (e) {
       controller.addError(DownloadException(
-        'Failed to download episode',
-        episode.id,
-        e,
+        message: 'Failed to download episode',
+        episodeId: episode.id,
+        originalError: e,
       ));
     } finally {
       _activeCancelTokens.remove(episode.id);
