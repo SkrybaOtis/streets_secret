@@ -33,7 +33,7 @@ sealed class Episode with _$Episode {
     
     // required DateTime updatedAt,
     // required List<String> tags,
-    required String thumbnailUrl,
+    // required String thumbnailUrl,
     required String difficulty,
     required int estimatedMinutes,
 
@@ -67,7 +67,7 @@ sealed class Episode with _$Episode {
       
       // updatedAt: DateTime.parse(json['updatedAt']), // ?? DateTime(2000), 
       // tags: getTagsFromJson(json['tags']), //?? List.empty(), 
-      thumbnailUrl: json['thumbnailUrl'] ?? 'exampleThumbnailUrl',
+      // thumbnailUrl: json['thumbnailUrl'] ?? 'exampleThumbnailUrl',
       difficulty: json['difficulty'] ?? 'exampleDifficulty',
       estimatedMinutes: json['estimatedMinutes'] ?? 1, 
       

@@ -21,7 +21,8 @@ mixin _$Episode {
 // required DateTime createdAt,
 // required DateTime updatedAt,
 // required List<String> tags,
- String get thumbnailUrl; String get difficulty; int get estimatedMinutes; Bases get bases; DialogMatrices get dialogsMatrices; ItemsDialogs get itemsDialogs; Switches get switches; UnlockedItems get unlocked;
+// required String thumbnailUrl,
+ String get difficulty; int get estimatedMinutes; Bases get bases; DialogMatrices get dialogsMatrices; ItemsDialogs get itemsDialogs; Switches get switches; UnlockedItems get unlocked;
 /// Create a copy of Episode
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -34,16 +35,16 @@ $EpisodeCopyWith<Episode> get copyWith => _$EpisodeCopyWithImpl<Episode>(this as
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Episode&&(identical(other.id, id) || other.id == id)&&(identical(other.version, version) || other.version == version)&&(identical(other.localization, localization) || other.localization == localization)&&const DeepCollectionEquality().equals(other.points, points)&&(identical(other.name, name) || other.name == name)&&(identical(other.description, description) || other.description == description)&&(identical(other.author, author) || other.author == author)&&(identical(other.thumbnailUrl, thumbnailUrl) || other.thumbnailUrl == thumbnailUrl)&&(identical(other.difficulty, difficulty) || other.difficulty == difficulty)&&(identical(other.estimatedMinutes, estimatedMinutes) || other.estimatedMinutes == estimatedMinutes)&&(identical(other.bases, bases) || other.bases == bases)&&(identical(other.dialogsMatrices, dialogsMatrices) || other.dialogsMatrices == dialogsMatrices)&&(identical(other.itemsDialogs, itemsDialogs) || other.itemsDialogs == itemsDialogs)&&(identical(other.switches, switches) || other.switches == switches)&&(identical(other.unlocked, unlocked) || other.unlocked == unlocked));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Episode&&(identical(other.id, id) || other.id == id)&&(identical(other.version, version) || other.version == version)&&(identical(other.localization, localization) || other.localization == localization)&&const DeepCollectionEquality().equals(other.points, points)&&(identical(other.name, name) || other.name == name)&&(identical(other.description, description) || other.description == description)&&(identical(other.author, author) || other.author == author)&&(identical(other.difficulty, difficulty) || other.difficulty == difficulty)&&(identical(other.estimatedMinutes, estimatedMinutes) || other.estimatedMinutes == estimatedMinutes)&&(identical(other.bases, bases) || other.bases == bases)&&(identical(other.dialogsMatrices, dialogsMatrices) || other.dialogsMatrices == dialogsMatrices)&&(identical(other.itemsDialogs, itemsDialogs) || other.itemsDialogs == itemsDialogs)&&(identical(other.switches, switches) || other.switches == switches)&&(identical(other.unlocked, unlocked) || other.unlocked == unlocked));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,version,localization,const DeepCollectionEquality().hash(points),name,description,author,thumbnailUrl,difficulty,estimatedMinutes,bases,dialogsMatrices,itemsDialogs,switches,unlocked);
+int get hashCode => Object.hash(runtimeType,id,version,localization,const DeepCollectionEquality().hash(points),name,description,author,difficulty,estimatedMinutes,bases,dialogsMatrices,itemsDialogs,switches,unlocked);
 
 @override
 String toString() {
-  return 'Episode(id: $id, version: $version, localization: $localization, points: $points, name: $name, description: $description, author: $author, thumbnailUrl: $thumbnailUrl, difficulty: $difficulty, estimatedMinutes: $estimatedMinutes, bases: $bases, dialogsMatrices: $dialogsMatrices, itemsDialogs: $itemsDialogs, switches: $switches, unlocked: $unlocked)';
+  return 'Episode(id: $id, version: $version, localization: $localization, points: $points, name: $name, description: $description, author: $author, difficulty: $difficulty, estimatedMinutes: $estimatedMinutes, bases: $bases, dialogsMatrices: $dialogsMatrices, itemsDialogs: $itemsDialogs, switches: $switches, unlocked: $unlocked)';
 }
 
 
@@ -54,7 +55,7 @@ abstract mixin class $EpisodeCopyWith<$Res>  {
   factory $EpisodeCopyWith(Episode value, $Res Function(Episode) _then) = _$EpisodeCopyWithImpl;
 @useResult
 $Res call({
- String id, int version, Localization localization, List<Point> points, String name, String description, String author, String thumbnailUrl, String difficulty, int estimatedMinutes, Bases bases, DialogMatrices dialogsMatrices, ItemsDialogs itemsDialogs, Switches switches, UnlockedItems unlocked
+ String id, int version, Localization localization, List<Point> points, String name, String description, String author, String difficulty, int estimatedMinutes, Bases bases, DialogMatrices dialogsMatrices, ItemsDialogs itemsDialogs, Switches switches, UnlockedItems unlocked
 });
 
 
@@ -71,7 +72,7 @@ class _$EpisodeCopyWithImpl<$Res>
 
 /// Create a copy of Episode
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? version = null,Object? localization = null,Object? points = null,Object? name = null,Object? description = null,Object? author = null,Object? thumbnailUrl = null,Object? difficulty = null,Object? estimatedMinutes = null,Object? bases = null,Object? dialogsMatrices = null,Object? itemsDialogs = null,Object? switches = null,Object? unlocked = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? version = null,Object? localization = null,Object? points = null,Object? name = null,Object? description = null,Object? author = null,Object? difficulty = null,Object? estimatedMinutes = null,Object? bases = null,Object? dialogsMatrices = null,Object? itemsDialogs = null,Object? switches = null,Object? unlocked = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,version: null == version ? _self.version : version // ignore: cast_nullable_to_non_nullable
@@ -80,7 +81,6 @@ as Localization,points: null == points ? _self.points : points // ignore: cast_n
 as List<Point>,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String,author: null == author ? _self.author : author // ignore: cast_nullable_to_non_nullable
-as String,thumbnailUrl: null == thumbnailUrl ? _self.thumbnailUrl : thumbnailUrl // ignore: cast_nullable_to_non_nullable
 as String,difficulty: null == difficulty ? _self.difficulty : difficulty // ignore: cast_nullable_to_non_nullable
 as String,estimatedMinutes: null == estimatedMinutes ? _self.estimatedMinutes : estimatedMinutes // ignore: cast_nullable_to_non_nullable
 as int,bases: null == bases ? _self.bases : bases // ignore: cast_nullable_to_non_nullable
@@ -224,10 +224,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  int version,  Localization localization,  List<Point> points,  String name,  String description,  String author,  String thumbnailUrl,  String difficulty,  int estimatedMinutes,  Bases bases,  DialogMatrices dialogsMatrices,  ItemsDialogs itemsDialogs,  Switches switches,  UnlockedItems unlocked)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  int version,  Localization localization,  List<Point> points,  String name,  String description,  String author,  String difficulty,  int estimatedMinutes,  Bases bases,  DialogMatrices dialogsMatrices,  ItemsDialogs itemsDialogs,  Switches switches,  UnlockedItems unlocked)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Episode() when $default != null:
-return $default(_that.id,_that.version,_that.localization,_that.points,_that.name,_that.description,_that.author,_that.thumbnailUrl,_that.difficulty,_that.estimatedMinutes,_that.bases,_that.dialogsMatrices,_that.itemsDialogs,_that.switches,_that.unlocked);case _:
+return $default(_that.id,_that.version,_that.localization,_that.points,_that.name,_that.description,_that.author,_that.difficulty,_that.estimatedMinutes,_that.bases,_that.dialogsMatrices,_that.itemsDialogs,_that.switches,_that.unlocked);case _:
   return orElse();
 
 }
@@ -245,10 +245,10 @@ return $default(_that.id,_that.version,_that.localization,_that.points,_that.nam
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  int version,  Localization localization,  List<Point> points,  String name,  String description,  String author,  String thumbnailUrl,  String difficulty,  int estimatedMinutes,  Bases bases,  DialogMatrices dialogsMatrices,  ItemsDialogs itemsDialogs,  Switches switches,  UnlockedItems unlocked)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  int version,  Localization localization,  List<Point> points,  String name,  String description,  String author,  String difficulty,  int estimatedMinutes,  Bases bases,  DialogMatrices dialogsMatrices,  ItemsDialogs itemsDialogs,  Switches switches,  UnlockedItems unlocked)  $default,) {final _that = this;
 switch (_that) {
 case _Episode():
-return $default(_that.id,_that.version,_that.localization,_that.points,_that.name,_that.description,_that.author,_that.thumbnailUrl,_that.difficulty,_that.estimatedMinutes,_that.bases,_that.dialogsMatrices,_that.itemsDialogs,_that.switches,_that.unlocked);}
+return $default(_that.id,_that.version,_that.localization,_that.points,_that.name,_that.description,_that.author,_that.difficulty,_that.estimatedMinutes,_that.bases,_that.dialogsMatrices,_that.itemsDialogs,_that.switches,_that.unlocked);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -262,10 +262,10 @@ return $default(_that.id,_that.version,_that.localization,_that.points,_that.nam
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  int version,  Localization localization,  List<Point> points,  String name,  String description,  String author,  String thumbnailUrl,  String difficulty,  int estimatedMinutes,  Bases bases,  DialogMatrices dialogsMatrices,  ItemsDialogs itemsDialogs,  Switches switches,  UnlockedItems unlocked)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  int version,  Localization localization,  List<Point> points,  String name,  String description,  String author,  String difficulty,  int estimatedMinutes,  Bases bases,  DialogMatrices dialogsMatrices,  ItemsDialogs itemsDialogs,  Switches switches,  UnlockedItems unlocked)?  $default,) {final _that = this;
 switch (_that) {
 case _Episode() when $default != null:
-return $default(_that.id,_that.version,_that.localization,_that.points,_that.name,_that.description,_that.author,_that.thumbnailUrl,_that.difficulty,_that.estimatedMinutes,_that.bases,_that.dialogsMatrices,_that.itemsDialogs,_that.switches,_that.unlocked);case _:
+return $default(_that.id,_that.version,_that.localization,_that.points,_that.name,_that.description,_that.author,_that.difficulty,_that.estimatedMinutes,_that.bases,_that.dialogsMatrices,_that.itemsDialogs,_that.switches,_that.unlocked);case _:
   return null;
 
 }
@@ -277,7 +277,7 @@ return $default(_that.id,_that.version,_that.localization,_that.points,_that.nam
 @JsonSerializable()
 
 class _Episode extends Episode {
-  const _Episode({required this.id, required this.version, required this.localization, required final  List<Point> points, required this.name, required this.description, required this.author, required this.thumbnailUrl, required this.difficulty, required this.estimatedMinutes, required this.bases, required this.dialogsMatrices, required this.itemsDialogs, required this.switches, required this.unlocked}): _points = points,super._();
+  const _Episode({required this.id, required this.version, required this.localization, required final  List<Point> points, required this.name, required this.description, required this.author, required this.difficulty, required this.estimatedMinutes, required this.bases, required this.dialogsMatrices, required this.itemsDialogs, required this.switches, required this.unlocked}): _points = points,super._();
   factory _Episode.fromJson(Map<String, dynamic> json) => _$EpisodeFromJson(json);
 
 @override final  String id;
@@ -299,7 +299,7 @@ class _Episode extends Episode {
 // required DateTime createdAt,
 // required DateTime updatedAt,
 // required List<String> tags,
-@override final  String thumbnailUrl;
+// required String thumbnailUrl,
 @override final  String difficulty;
 @override final  int estimatedMinutes;
 @override final  Bases bases;
@@ -321,16 +321,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Episode&&(identical(other.id, id) || other.id == id)&&(identical(other.version, version) || other.version == version)&&(identical(other.localization, localization) || other.localization == localization)&&const DeepCollectionEquality().equals(other._points, _points)&&(identical(other.name, name) || other.name == name)&&(identical(other.description, description) || other.description == description)&&(identical(other.author, author) || other.author == author)&&(identical(other.thumbnailUrl, thumbnailUrl) || other.thumbnailUrl == thumbnailUrl)&&(identical(other.difficulty, difficulty) || other.difficulty == difficulty)&&(identical(other.estimatedMinutes, estimatedMinutes) || other.estimatedMinutes == estimatedMinutes)&&(identical(other.bases, bases) || other.bases == bases)&&(identical(other.dialogsMatrices, dialogsMatrices) || other.dialogsMatrices == dialogsMatrices)&&(identical(other.itemsDialogs, itemsDialogs) || other.itemsDialogs == itemsDialogs)&&(identical(other.switches, switches) || other.switches == switches)&&(identical(other.unlocked, unlocked) || other.unlocked == unlocked));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Episode&&(identical(other.id, id) || other.id == id)&&(identical(other.version, version) || other.version == version)&&(identical(other.localization, localization) || other.localization == localization)&&const DeepCollectionEquality().equals(other._points, _points)&&(identical(other.name, name) || other.name == name)&&(identical(other.description, description) || other.description == description)&&(identical(other.author, author) || other.author == author)&&(identical(other.difficulty, difficulty) || other.difficulty == difficulty)&&(identical(other.estimatedMinutes, estimatedMinutes) || other.estimatedMinutes == estimatedMinutes)&&(identical(other.bases, bases) || other.bases == bases)&&(identical(other.dialogsMatrices, dialogsMatrices) || other.dialogsMatrices == dialogsMatrices)&&(identical(other.itemsDialogs, itemsDialogs) || other.itemsDialogs == itemsDialogs)&&(identical(other.switches, switches) || other.switches == switches)&&(identical(other.unlocked, unlocked) || other.unlocked == unlocked));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,version,localization,const DeepCollectionEquality().hash(_points),name,description,author,thumbnailUrl,difficulty,estimatedMinutes,bases,dialogsMatrices,itemsDialogs,switches,unlocked);
+int get hashCode => Object.hash(runtimeType,id,version,localization,const DeepCollectionEquality().hash(_points),name,description,author,difficulty,estimatedMinutes,bases,dialogsMatrices,itemsDialogs,switches,unlocked);
 
 @override
 String toString() {
-  return 'Episode(id: $id, version: $version, localization: $localization, points: $points, name: $name, description: $description, author: $author, thumbnailUrl: $thumbnailUrl, difficulty: $difficulty, estimatedMinutes: $estimatedMinutes, bases: $bases, dialogsMatrices: $dialogsMatrices, itemsDialogs: $itemsDialogs, switches: $switches, unlocked: $unlocked)';
+  return 'Episode(id: $id, version: $version, localization: $localization, points: $points, name: $name, description: $description, author: $author, difficulty: $difficulty, estimatedMinutes: $estimatedMinutes, bases: $bases, dialogsMatrices: $dialogsMatrices, itemsDialogs: $itemsDialogs, switches: $switches, unlocked: $unlocked)';
 }
 
 
@@ -341,7 +341,7 @@ abstract mixin class _$EpisodeCopyWith<$Res> implements $EpisodeCopyWith<$Res> {
   factory _$EpisodeCopyWith(_Episode value, $Res Function(_Episode) _then) = __$EpisodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id, int version, Localization localization, List<Point> points, String name, String description, String author, String thumbnailUrl, String difficulty, int estimatedMinutes, Bases bases, DialogMatrices dialogsMatrices, ItemsDialogs itemsDialogs, Switches switches, UnlockedItems unlocked
+ String id, int version, Localization localization, List<Point> points, String name, String description, String author, String difficulty, int estimatedMinutes, Bases bases, DialogMatrices dialogsMatrices, ItemsDialogs itemsDialogs, Switches switches, UnlockedItems unlocked
 });
 
 
@@ -358,7 +358,7 @@ class __$EpisodeCopyWithImpl<$Res>
 
 /// Create a copy of Episode
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? version = null,Object? localization = null,Object? points = null,Object? name = null,Object? description = null,Object? author = null,Object? thumbnailUrl = null,Object? difficulty = null,Object? estimatedMinutes = null,Object? bases = null,Object? dialogsMatrices = null,Object? itemsDialogs = null,Object? switches = null,Object? unlocked = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? version = null,Object? localization = null,Object? points = null,Object? name = null,Object? description = null,Object? author = null,Object? difficulty = null,Object? estimatedMinutes = null,Object? bases = null,Object? dialogsMatrices = null,Object? itemsDialogs = null,Object? switches = null,Object? unlocked = null,}) {
   return _then(_Episode(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,version: null == version ? _self.version : version // ignore: cast_nullable_to_non_nullable
@@ -367,7 +367,6 @@ as Localization,points: null == points ? _self._points : points // ignore: cast_
 as List<Point>,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String,author: null == author ? _self.author : author // ignore: cast_nullable_to_non_nullable
-as String,thumbnailUrl: null == thumbnailUrl ? _self.thumbnailUrl : thumbnailUrl // ignore: cast_nullable_to_non_nullable
 as String,difficulty: null == difficulty ? _self.difficulty : difficulty // ignore: cast_nullable_to_non_nullable
 as String,estimatedMinutes: null == estimatedMinutes ? _self.estimatedMinutes : estimatedMinutes // ignore: cast_nullable_to_non_nullable
 as int,bases: null == bases ? _self.bases : bases // ignore: cast_nullable_to_non_nullable
