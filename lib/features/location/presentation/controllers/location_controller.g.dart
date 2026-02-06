@@ -67,7 +67,7 @@ final class AvailableLocationsProvider
 }
 
 String _$availableLocationsHash() =>
-    r'8a4b1810d953c7b5264af673bc657e82144536e0';
+    r'8400f48b87a242e86e81ad3f3ce9ae610769493e';
 
 final class AvailableLocationsFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<List<GameLocation>>, String> {
