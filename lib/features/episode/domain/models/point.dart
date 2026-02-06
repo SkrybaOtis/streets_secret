@@ -21,6 +21,7 @@ sealed class Point with _$Point {
   factory Point.fromJson(Map<String, dynamic> json) => _$PointFromJson(json);
 
   static List<Point> getListPointFromJson(List<dynamic> json) {
+    // AppLogger.warning("Point getting");
     List<Point> newListPoint = [];
     for(var point in json){
       try{

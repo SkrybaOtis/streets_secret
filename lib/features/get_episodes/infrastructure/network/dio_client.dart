@@ -19,7 +19,7 @@ class DioClient {
   
   DioClient() {
     _dio = Dio(BaseOptions(
-      baseUrl: ApiConstants.baseUrl,
+      baseUrl: '${ApiConstants.baseUrl}${ApiConstants.tag}',
       connectTimeout: ApiConstants.connectTimeout,
       receiveTimeout: ApiConstants.receiveTimeout,
       headers: {

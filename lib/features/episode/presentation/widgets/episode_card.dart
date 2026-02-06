@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../../../core/constants/api_constants.dart';
 import '../../../../core/constants/app_sizes.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../controllers/episode_list_controller.dart';
@@ -35,7 +36,7 @@ class EpisodeCard extends ConsumerWidget {
                 color: AppColors.primary.withValues(alpha: 0.1),
                 child: //episode.thumbnailUrl != null ?
                      Image.network(
-                        episode.thumbnailUrl,
+                        ApiConstants.baseUrl + ApiConstants.tag + episode.thumbnailUrl,
                         fit: BoxFit.cover,
                         errorBuilder: (_, __, ___) => _buildPlaceholder(),
                       )

@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:streets_sercets/core/constants/api_constants.dart';
 
 import '../../../../core/constants/storage_constants.dart';
 import '../../../../core/errors/app_exceptions.dart';
@@ -135,7 +136,7 @@ class DownloadService {
     try {
       
       await _dioClient.download(
-        episode.downloadUrl,
+        ApiConstants.baseUrl + ApiConstants.tag + episode.downloadUrl,
         partialPath,
         resumeDownload: shouldResume,
         existingBytes: existingBytes,
@@ -170,7 +171,7 @@ class DownloadService {
         
         // Retry download from scratch
         await _dioClient.download(
-          episode.downloadUrl,
+          ApiConstants.baseUrl + ApiConstants.tag + episode.downloadUrl,
           partialPath,
           resumeDownload: false,
           cancelToken: cancelToken,

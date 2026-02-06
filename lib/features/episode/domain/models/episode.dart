@@ -49,6 +49,7 @@ sealed class Episode with _$Episode {
 
   factory Episode.getFromJson(Map<String, dynamic> json) {
     // json.forEach((k, v) { AppLogger.debug('$k : $v \n'); });
+    // AppLogger.warning("It's coming");
     Episode newEpisode = Episode(
       id: json['id'] ?? 'exampleID', 
       version: json['version'] ?? 1 , 

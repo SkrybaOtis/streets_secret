@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/constants/api_constants.dart';
 import '../../data/models/episode_manifest_model.dart';
 import '../../domain/repositories/episode_repository.dart';
 import '../providers/episode_providers.dart';
@@ -36,7 +37,7 @@ class EpisodeCard extends ConsumerWidget {
               AspectRatio(
                 aspectRatio: 16 / 9,
                 child: Image.network(
-                  episode.thumbnailUrl!,
+                  ApiConstants.baseUrl + ApiConstants.tag + episode.thumbnailUrl!,
                   fit: BoxFit.cover,
                   errorBuilder: (_, __, ___) => Container(
                     color: Colors.grey[300],

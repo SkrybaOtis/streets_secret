@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:streets_sercets/core/constants/api_constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../data/models/episode_manifest_model.dart';
@@ -42,7 +43,7 @@ class EpisodeDetailScreen extends ConsumerWidget {
               ),
               background: episode.thumbnailUrl != null
                   ? Image.network(
-                      episode.thumbnailUrl!,
+                      ApiConstants.baseUrl+ApiConstants.tag+episode.thumbnailUrl!,
                       fit: BoxFit.cover,
                       errorBuilder: (_, __, ___) => Container(
                         color: Colors.grey[800],
