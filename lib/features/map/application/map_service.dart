@@ -1,3 +1,5 @@
+import 'dart:io' show Platform;
+
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -8,18 +10,15 @@ import '../../../core/utils/logger_utils.dart';
 part 'map_service.g.dart';
 
 class MapService {
-  /// Request location permission
   Future<bool> requestLocationPermission() async {
     final status = await Permission.locationWhenInUse.request();
     return status.isGranted;
   }
 
-  /// Check if location service is enabled
   Future<bool> isLocationServiceEnabled() async {
     return await Geolocator.isLocationServiceEnabled();
   }
 
-  /// Get current position
   Future<Position?> getCurrentPosition() async {
     try {
       final hasPermission = await requestLocationPermission();
@@ -46,32 +45,155 @@ class MapService {
     }
   }
 
-  /// Open location in external map app
-  Future<bool> openInExternalMap(double latitude, double longitude, String label) async {
-    // Try Google Maps first
-    final googleMapsUrl = Uri.parse(
-      'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude',
-    );
-    
-    // Fallback to geo URI
-    final geoUrl = Uri.parse('geo:$latitude,$longitude?q=$latitude,$longitude($label)');
+  /// Open location in external map app - cross-platform safe
+  Future<bool> openInExternalMap(
+    double latitude,
+    double longitude,
+    String label,
+  ) async {
+    // Validate coordinates
+    if (!_isValidCoordinate(latitude, longitude)) {
+      AppLogger.warning('Invalid coordinates: $latitude, $longitude');
+      return false;
+    }
 
-    try {
-      if (await canLaunchUrl(googleMapsUrl)) {
-        return await launchUrl(googleMapsUrl, mode: LaunchMode.externalApplication);
-      } else if (await canLaunchUrl(geoUrl)) {
-        return await launchUrl(geoUrl, mode: LaunchMode.externalApplication);
+    // Sanitize label for URL safety
+    final encodedLabel = Uri.encodeComponent(label);
+
+    final urls = _buildMapUrls(latitude, longitude, encodedLabel);
+
+    for (final urlConfig in urls) {
+      try {
+        final uri = Uri.parse(urlConfig.url);
+        
+        // On Android, try launching directly without canLaunchUrl check
+        // canLaunchUrl can return false even when launch succeeds
+        final launched = await launchUrl(
+          uri,
+          mode: urlConfig.mode,
+        );
+
+        if (launched) {
+          AppLogger.info('Opened map with: ${urlConfig.name}');
+          return true;
+        }
+      } catch (e) {
+        AppLogger.debug('${urlConfig.name} failed: $e');
+        continue;
       }
-      
-      AppLogger.warning('Could not launch map app');
-      return false;
-    } catch (e, stackTrace) {
-      AppLogger.error('Failed to open external map', e, stackTrace);
-      return false;
+    }
+
+    AppLogger.warning('Could not launch any map application');
+    return false;
+  }
+
+  /// Build platform-appropriate URL list
+  List<_MapUrlConfig> _buildMapUrls(
+    double latitude,
+    double longitude,
+    String encodedLabel,
+  ) {
+    // Google Maps app-specific URL (works best on Android)
+    final googleMapsAppUrl =
+        'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
+
+    // Google Maps with marker label
+    final googleMapsWithLabel =
+        'https://www.google.com/maps/place/$latitude,$longitude';
+
+    // Standard geo URI (Android native)
+    final geoUrl =
+        'geo:$latitude,$longitude?q=$latitude,$longitude($encodedLabel)';
+
+    // Geo URI without label (simpler, more compatible)
+    final geoSimpleUrl = 'geo:$latitude,$longitude';
+
+    // OpenStreetMap fallback
+    final openStreetMapUrl =
+        'https://www.openstreetmap.org/?mlat=$latitude&mlon=$longitude&zoom=16';
+
+    if (Platform.isAndroid) {
+      return [
+        // Try Google Maps HTTPS first (most reliable)
+        _MapUrlConfig(
+          name: 'Google Maps HTTPS',
+          url: googleMapsAppUrl,
+          mode: LaunchMode.externalApplication,
+        ),
+        // Then geo: with label
+        _MapUrlConfig(
+          name: 'Geo URI with label',
+          url: geoUrl,
+          mode: LaunchMode.externalApplication,
+        ),
+        // Simple geo: as fallback
+        _MapUrlConfig(
+          name: 'Geo URI simple',
+          url: geoSimpleUrl,
+          mode: LaunchMode.externalApplication,
+        ),
+        // Web fallback
+        _MapUrlConfig(
+          name: 'Google Maps (Platform Default)',
+          url: googleMapsAppUrl,
+          mode: LaunchMode.platformDefault,
+        ),
+        // In-app browser as last resort
+        _MapUrlConfig(
+          name: 'Google Maps (In-App)',
+          url: googleMapsAppUrl,
+          mode: LaunchMode.inAppBrowserView,
+        ),
+      ];
+    } else if (Platform.isIOS) {
+      // Apple Maps URL
+      final appleMapsUrl =
+          'https://maps.apple.com/?q=$encodedLabel&ll=$latitude,$longitude';
+
+      return [
+        _MapUrlConfig(
+          name: 'Apple Maps',
+          url: appleMapsUrl,
+          mode: LaunchMode.externalApplication,
+        ),
+        _MapUrlConfig(
+          name: 'Google Maps',
+          url: googleMapsAppUrl,
+          mode: LaunchMode.externalApplication,
+        ),
+      ];
+    } else {
+      // Desktop platforms (Linux, Windows, macOS)
+      return [
+        _MapUrlConfig(
+          name: 'Google Maps',
+          url: googleMapsAppUrl,
+          mode: LaunchMode.externalApplication,
+        ),
+        _MapUrlConfig(
+          name: 'OpenStreetMap',
+          url: openStreetMapUrl,
+          mode: LaunchMode.externalApplication,
+        ),
+        _MapUrlConfig(
+          name: 'Google Maps (Platform Default)',
+          url: googleMapsAppUrl,
+          mode: LaunchMode.platformDefault,
+        ),
+      ];
     }
   }
 
-  /// Calculate distance between two points
+  /// Validate coordinate ranges
+  bool _isValidCoordinate(double latitude, double longitude) {
+    return latitude >= -90 &&
+        latitude <= 90 &&
+        longitude >= -180 &&
+        longitude <= 180 &&
+        !latitude.isNaN &&
+        !longitude.isNaN;
+  }
+
   double calculateDistance(
     double startLat,
     double startLng,
@@ -80,6 +202,18 @@ class MapService {
   ) {
     return Geolocator.distanceBetween(startLat, startLng, endLat, endLng);
   }
+}
+
+class _MapUrlConfig {
+  final String name;
+  final String url;
+  final LaunchMode mode;
+
+  const _MapUrlConfig({
+    required this.name,
+    required this.url,
+    required this.mode,
+  });
 }
 
 @riverpod
