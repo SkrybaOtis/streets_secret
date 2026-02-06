@@ -28,7 +28,7 @@ Future<List<GameLocation>> availableLocations(
   // Return unlocked first, then first locked (available to unlock)
   return [
     ...unlockedLocations,
-    if (lockedLocations.isNotEmpty) lockedLocations.first,
+    //if (lockedLocations.isNotEmpty) lockedLocations.first,
   ];
 }
 
