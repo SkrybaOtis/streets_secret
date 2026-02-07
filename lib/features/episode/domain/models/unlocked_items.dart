@@ -13,6 +13,7 @@ sealed class UnlockedItems with _$UnlockedItems {
     @Default([]) List<int> clues,
     @Default([]) List<int> enigmas,
     @Default([]) List<String> locations,
+    @Default([]) List<String> availableLocations,
   }) = _UnlockedItems;
 
   factory UnlockedItems.fromJson(Map<String, dynamic> json) =>
@@ -25,7 +26,8 @@ sealed class UnlockedItems with _$UnlockedItems {
       characters: [], 
       clues: [], 
       enigmas: [], 
-      locations: []
+      locations: [],
+      availableLocations: []
     );
 
     try{
@@ -33,6 +35,7 @@ sealed class UnlockedItems with _$UnlockedItems {
       List<int> newUnlockedClues = [];
       List<int> newUnlockedEnigmas = [];
       List<String> newUnlockedLocations = [];
+      List<String> newAvailableLocations = [];
 
       // AppLogger.debug(json.toString());
       for(int unlockedItem in json['unlocked_characters']){
@@ -47,13 +50,22 @@ sealed class UnlockedItems with _$UnlockedItems {
       for(int unlockedItem in json['unlocked_locations']){
           newUnlockedLocations.add(unlockedItem.toString());
       }
+      
+      // Handle available_locations if present
+      if (json.containsKey('available_locations')) {
+        for(int availableItem in json['available_locations']){
+            newAvailableLocations.add(availableItem.toString());
+        }
+      }
+      
       // AppLogger.debug("unlocked_characters: $newUnlockedCharacters, \nunlocked_clues: $newUnlockedClues, \nunlocked_enigmas: $newUnlockedEnigmas, \nunlocked_locations: $newUnlockedLocations");
 
       newUnlockedItems = UnlockedItems(
         characters: newUnlockedCharacters, 
         clues: newUnlockedClues, 
         enigmas: newUnlockedEnigmas, 
-        locations: newUnlockedLocations
+        locations: newUnlockedLocations,
+        availableLocations: newAvailableLocations
       );
       // AppLogger.debug(newUnlockedItems.toString());
 
@@ -88,6 +100,12 @@ sealed class UnlockedItems with _$UnlockedItems {
     return copyWith(locations: [...locations, locationId]);
   }
 
+  /// Add a location to available list (can be unlocked but not yet unlocked)
+  UnlockedItems withAvailableLocation(String locationId) {
+    if (availableLocations.contains(locationId) || locations.contains(locationId)) return this;
+    return copyWith(availableLocations: [...availableLocations, locationId]);
+  }
+
   /// Merge with another UnlockedItems (for state restoration)
   UnlockedItems merge(UnlockedItems other) {
     return UnlockedItems(
@@ -95,6 +113,7 @@ sealed class UnlockedItems with _$UnlockedItems {
       clues: {...clues, ...other.clues}.toList(),
       enigmas: {...enigmas, ...other.enigmas}.toList(),
       locations: {...locations, ...other.locations}.toList(),
+      availableLocations: {...availableLocations, ...other.availableLocations}.toList(),
     );
   }
 }

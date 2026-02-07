@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UnlockedItems {
 
- List<int> get characters; List<int> get clues; List<int> get enigmas; List<String> get locations;
+ List<int> get characters; List<int> get clues; List<int> get enigmas; List<String> get locations; List<String> get availableLocations;
 /// Create a copy of UnlockedItems
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $UnlockedItemsCopyWith<UnlockedItems> get copyWith => _$UnlockedItemsCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UnlockedItems&&const DeepCollectionEquality().equals(other.characters, characters)&&const DeepCollectionEquality().equals(other.clues, clues)&&const DeepCollectionEquality().equals(other.enigmas, enigmas)&&const DeepCollectionEquality().equals(other.locations, locations));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UnlockedItems&&const DeepCollectionEquality().equals(other.characters, characters)&&const DeepCollectionEquality().equals(other.clues, clues)&&const DeepCollectionEquality().equals(other.enigmas, enigmas)&&const DeepCollectionEquality().equals(other.locations, locations)&&const DeepCollectionEquality().equals(other.availableLocations, availableLocations));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(characters),const DeepCollectionEquality().hash(clues),const DeepCollectionEquality().hash(enigmas),const DeepCollectionEquality().hash(locations));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(characters),const DeepCollectionEquality().hash(clues),const DeepCollectionEquality().hash(enigmas),const DeepCollectionEquality().hash(locations),const DeepCollectionEquality().hash(availableLocations));
 
 @override
 String toString() {
-  return 'UnlockedItems(characters: $characters, clues: $clues, enigmas: $enigmas, locations: $locations)';
+  return 'UnlockedItems(characters: $characters, clues: $clues, enigmas: $enigmas, locations: $locations, availableLocations: $availableLocations)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $UnlockedItemsCopyWith<$Res>  {
   factory $UnlockedItemsCopyWith(UnlockedItems value, $Res Function(UnlockedItems) _then) = _$UnlockedItemsCopyWithImpl;
 @useResult
 $Res call({
- List<int> characters, List<int> clues, List<int> enigmas, List<String> locations
+ List<int> characters, List<int> clues, List<int> enigmas, List<String> locations, List<String> availableLocations
 });
 
 
@@ -65,12 +65,13 @@ class _$UnlockedItemsCopyWithImpl<$Res>
 
 /// Create a copy of UnlockedItems
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? characters = null,Object? clues = null,Object? enigmas = null,Object? locations = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? characters = null,Object? clues = null,Object? enigmas = null,Object? locations = null,Object? availableLocations = null,}) {
   return _then(_self.copyWith(
 characters: null == characters ? _self.characters : characters // ignore: cast_nullable_to_non_nullable
 as List<int>,clues: null == clues ? _self.clues : clues // ignore: cast_nullable_to_non_nullable
 as List<int>,enigmas: null == enigmas ? _self.enigmas : enigmas // ignore: cast_nullable_to_non_nullable
 as List<int>,locations: null == locations ? _self.locations : locations // ignore: cast_nullable_to_non_nullable
+as List<String>,availableLocations: null == availableLocations ? _self.availableLocations : availableLocations // ignore: cast_nullable_to_non_nullable
 as List<String>,
   ));
 }
@@ -153,10 +154,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<int> characters,  List<int> clues,  List<int> enigmas,  List<String> locations)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<int> characters,  List<int> clues,  List<int> enigmas,  List<String> locations,  List<String> availableLocations)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _UnlockedItems() when $default != null:
-return $default(_that.characters,_that.clues,_that.enigmas,_that.locations);case _:
+return $default(_that.characters,_that.clues,_that.enigmas,_that.locations,_that.availableLocations);case _:
   return orElse();
 
 }
@@ -174,10 +175,10 @@ return $default(_that.characters,_that.clues,_that.enigmas,_that.locations);case
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<int> characters,  List<int> clues,  List<int> enigmas,  List<String> locations)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<int> characters,  List<int> clues,  List<int> enigmas,  List<String> locations,  List<String> availableLocations)  $default,) {final _that = this;
 switch (_that) {
 case _UnlockedItems():
-return $default(_that.characters,_that.clues,_that.enigmas,_that.locations);}
+return $default(_that.characters,_that.clues,_that.enigmas,_that.locations,_that.availableLocations);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -191,10 +192,10 @@ return $default(_that.characters,_that.clues,_that.enigmas,_that.locations);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<int> characters,  List<int> clues,  List<int> enigmas,  List<String> locations)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<int> characters,  List<int> clues,  List<int> enigmas,  List<String> locations,  List<String> availableLocations)?  $default,) {final _that = this;
 switch (_that) {
 case _UnlockedItems() when $default != null:
-return $default(_that.characters,_that.clues,_that.enigmas,_that.locations);case _:
+return $default(_that.characters,_that.clues,_that.enigmas,_that.locations,_that.availableLocations);case _:
   return null;
 
 }
@@ -206,7 +207,7 @@ return $default(_that.characters,_that.clues,_that.enigmas,_that.locations);case
 @JsonSerializable()
 
 class _UnlockedItems extends UnlockedItems {
-  const _UnlockedItems({final  List<int> characters = const [], final  List<int> clues = const [], final  List<int> enigmas = const [], final  List<String> locations = const []}): _characters = characters,_clues = clues,_enigmas = enigmas,_locations = locations,super._();
+  const _UnlockedItems({final  List<int> characters = const [], final  List<int> clues = const [], final  List<int> enigmas = const [], final  List<String> locations = const [], final  List<String> availableLocations = const []}): _characters = characters,_clues = clues,_enigmas = enigmas,_locations = locations,_availableLocations = availableLocations,super._();
   factory _UnlockedItems.fromJson(Map<String, dynamic> json) => _$UnlockedItemsFromJson(json);
 
  final  List<int> _characters;
@@ -237,6 +238,13 @@ class _UnlockedItems extends UnlockedItems {
   return EqualUnmodifiableListView(_locations);
 }
 
+ final  List<String> _availableLocations;
+@override@JsonKey() List<String> get availableLocations {
+  if (_availableLocations is EqualUnmodifiableListView) return _availableLocations;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_availableLocations);
+}
+
 
 /// Create a copy of UnlockedItems
 /// with the given fields replaced by the non-null parameter values.
@@ -251,16 +259,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UnlockedItems&&const DeepCollectionEquality().equals(other._characters, _characters)&&const DeepCollectionEquality().equals(other._clues, _clues)&&const DeepCollectionEquality().equals(other._enigmas, _enigmas)&&const DeepCollectionEquality().equals(other._locations, _locations));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UnlockedItems&&const DeepCollectionEquality().equals(other._characters, _characters)&&const DeepCollectionEquality().equals(other._clues, _clues)&&const DeepCollectionEquality().equals(other._enigmas, _enigmas)&&const DeepCollectionEquality().equals(other._locations, _locations)&&const DeepCollectionEquality().equals(other._availableLocations, _availableLocations));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_characters),const DeepCollectionEquality().hash(_clues),const DeepCollectionEquality().hash(_enigmas),const DeepCollectionEquality().hash(_locations));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_characters),const DeepCollectionEquality().hash(_clues),const DeepCollectionEquality().hash(_enigmas),const DeepCollectionEquality().hash(_locations),const DeepCollectionEquality().hash(_availableLocations));
 
 @override
 String toString() {
-  return 'UnlockedItems(characters: $characters, clues: $clues, enigmas: $enigmas, locations: $locations)';
+  return 'UnlockedItems(characters: $characters, clues: $clues, enigmas: $enigmas, locations: $locations, availableLocations: $availableLocations)';
 }
 
 
@@ -271,7 +279,7 @@ abstract mixin class _$UnlockedItemsCopyWith<$Res> implements $UnlockedItemsCopy
   factory _$UnlockedItemsCopyWith(_UnlockedItems value, $Res Function(_UnlockedItems) _then) = __$UnlockedItemsCopyWithImpl;
 @override @useResult
 $Res call({
- List<int> characters, List<int> clues, List<int> enigmas, List<String> locations
+ List<int> characters, List<int> clues, List<int> enigmas, List<String> locations, List<String> availableLocations
 });
 
 
@@ -288,12 +296,13 @@ class __$UnlockedItemsCopyWithImpl<$Res>
 
 /// Create a copy of UnlockedItems
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? characters = null,Object? clues = null,Object? enigmas = null,Object? locations = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? characters = null,Object? clues = null,Object? enigmas = null,Object? locations = null,Object? availableLocations = null,}) {
   return _then(_UnlockedItems(
 characters: null == characters ? _self._characters : characters // ignore: cast_nullable_to_non_nullable
 as List<int>,clues: null == clues ? _self._clues : clues // ignore: cast_nullable_to_non_nullable
 as List<int>,enigmas: null == enigmas ? _self._enigmas : enigmas // ignore: cast_nullable_to_non_nullable
 as List<int>,locations: null == locations ? _self._locations : locations // ignore: cast_nullable_to_non_nullable
+as List<String>,availableLocations: null == availableLocations ? _self._availableLocations : availableLocations // ignore: cast_nullable_to_non_nullable
 as List<String>,
   ));
 }

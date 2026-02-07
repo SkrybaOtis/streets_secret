@@ -28,6 +28,11 @@ _UnlockedItems _$UnlockedItemsFromJson(Map<String, dynamic> json) =>
               ?.map((e) => e as String)
               .toList() ??
           const [],
+      availableLocations:
+          (json['availableLocations'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$UnlockedItemsToJson(_UnlockedItems instance) =>
@@ -36,4 +41,5 @@ Map<String, dynamic> _$UnlockedItemsToJson(_UnlockedItems instance) =>
       'clues': instance.clues,
       'enigmas': instance.enigmas,
       'locations': instance.locations,
+      'availableLocations': instance.availableLocations,
     };

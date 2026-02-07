@@ -44,9 +44,9 @@ class GameStateService {
       newState = newState.unlockEnigma(enigmaId);
     }
 
-    // Unlock locations from dialog
+    // Make locations available (they become unlockable but not yet unlocked)
     for (final locationId in dialog.locations) {
-      newState = newState.unlockLocation(locationId.toString());
+      newState = newState.makeLocationAvailable(locationId.toString());
     }
 
     // Apply switch if present

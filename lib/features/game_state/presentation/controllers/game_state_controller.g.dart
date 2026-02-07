@@ -51,7 +51,7 @@ final class GameStateControllerProvider
 }
 
 String _$gameStateControllerHash() =>
-    r'a7af723e77c91ea7bcd7ad41dae1ed6569d364a7';
+    r'7e6c51bc6c939d101e7ca55a99bd0dfb3073f6f2';
 
 final class GameStateControllerFamily extends $Family
     with
@@ -415,4 +415,82 @@ final class UnlockedLocationsFamily extends $Family
 
   @override
   String toString() => r'unlockedLocationsProvider';
+}
+
+@ProviderFor(availableLocations)
+final availableLocationsProvider = AvailableLocationsFamily._();
+
+final class AvailableLocationsProvider
+    extends $FunctionalProvider<List<String>, List<String>, List<String>>
+    with $Provider<List<String>> {
+  AvailableLocationsProvider._({
+    required AvailableLocationsFamily super.from,
+    required String super.argument,
+  }) : super(
+         retry: null,
+         name: r'availableLocationsProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$availableLocationsHash();
+
+  @override
+  String toString() {
+    return r'availableLocationsProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  $ProviderElement<List<String>> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  List<String> create(Ref ref) {
+    final argument = this.argument as String;
+    return availableLocations(ref, argument);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(List<String> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<List<String>>(value),
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is AvailableLocationsProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$availableLocationsHash() =>
+    r'826ab609b0a63f8d332915a702e94164a79d020a';
+
+final class AvailableLocationsFamily extends $Family
+    with $FunctionalFamilyOverride<List<String>, String> {
+  AvailableLocationsFamily._()
+    : super(
+        retry: null,
+        name: r'availableLocationsProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  AvailableLocationsProvider call(String episodeId) =>
+      AvailableLocationsProvider._(argument: episodeId, from: this);
+
+  @override
+  String toString() => r'availableLocationsProvider';
 }

@@ -1,4 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:streets_sercets/core/utils/logger_utils.dart';
 
 import '../../../episode/presentation/controllers/episode_list_controller.dart';
 import '../../../game_state/presentation/controllers/game_state_controller.dart';
@@ -14,21 +15,30 @@ Future<List<GameLocation>> availableLocations(
   final episode = await ref.watch(episodeProvider(episodeId).future);
   final unlockedLocationIds = ref.watch(unlockedLocationsProvider(episodeId));
   
+  // Get available location IDs from game state
+  final gameState = ref.watch(gameStateControllerProvider(episodeId));
+  final availableLocationIds = gameState.maybeWhen(
+    data: (state) => state.unlocked.availableLocations,
+    orElse: () => <String>[],
+  );
+  
   final unlockedLocations = <GameLocation>[];
-  final lockedLocations = <GameLocation>[];
+  final availableButLockedLocations = <GameLocation>[];
+
+  AppLogger.warning(episode.bases.baseLocations.toString());
 
   for (final location in episode.bases.baseLocations) {
     if (unlockedLocationIds.contains(location.id)) {
       unlockedLocations.add(location);
-    } else {
-      lockedLocations.add(location);
+    } else if (availableLocationIds.contains(location.id)) {
+      availableButLockedLocations.add(location);
     }
   }
 
-  // Return unlocked first, then first locked (available to unlock)
+  // Return unlocked first, then available (locked but can be unlocked)
   return [
     ...unlockedLocations,
-    //if (lockedLocations.isNotEmpty) lockedLocations.first,
+    ...availableButLockedLocations,
   ];
 }
 

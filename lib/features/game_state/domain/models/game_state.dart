@@ -84,6 +84,11 @@ sealed class GameState with _$GameState {
     return copyWith(unlocked: unlocked.withLocation(locationId));
   }
 
+  /// Make a location available to unlock (not yet unlocked but can be)
+  GameState makeLocationAvailable(String locationId) {
+    return copyWith(unlocked: unlocked.withAvailableLocation(locationId));
+  }
+
   /// Merge initial state with saved state
   GameState mergeWith(UnlockedItems initialUnlocked) {
     return copyWith(

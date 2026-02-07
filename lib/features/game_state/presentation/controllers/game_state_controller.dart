@@ -36,6 +36,11 @@ class GameStateController extends _$GameStateController {
     state = state.whenData((s) => s.unlockLocation(locationId));
   }
 
+  /// Make a location available to unlock
+  Future<void> makeLocationAvailable(String locationId) async {
+    state = state.whenData((s) => s.makeLocationAvailable(locationId));
+  }
+
   /// Unlock a character
   Future<void> unlockCharacter(int characterId) async {
     state = state.whenData((s) => s.unlockCharacter(characterId));
@@ -127,6 +132,14 @@ List<int> unlockedEnigmas(Ref ref, String episodeId) {
 List<String> unlockedLocations(Ref ref, String episodeId) {
   return ref.watch(gameStateControllerProvider(episodeId)).maybeWhen(
     data: (state) => state.unlocked.locations,
+    orElse: () => [],
+  );
+}
+
+@riverpod
+List<String> availableLocations(Ref ref, String episodeId) {
+  return ref.watch(gameStateControllerProvider(episodeId)).maybeWhen(
+    data: (state) => state.unlocked.availableLocations,
     orElse: () => [],
   );
 }
