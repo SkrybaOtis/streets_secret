@@ -242,3 +242,106 @@ final class IsLocationUnlockedFamily extends $Family
   @override
   String toString() => r'isLocationUnlockedProvider';
 }
+
+@ProviderFor(LocationDialogController)
+final locationDialogControllerProvider = LocationDialogControllerFamily._();
+
+final class LocationDialogControllerProvider
+    extends $NotifierProvider<LocationDialogController, String> {
+  LocationDialogControllerProvider._({
+    required LocationDialogControllerFamily super.from,
+    required (String, String) super.argument,
+  }) : super(
+         retry: null,
+         name: r'locationDialogControllerProvider',
+         isAutoDispose: false,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$locationDialogControllerHash();
+
+  @override
+  String toString() {
+    return r'locationDialogControllerProvider'
+        ''
+        '$argument';
+  }
+
+  @$internal
+  @override
+  LocationDialogController create() => LocationDialogController();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(String value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<String>(value),
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is LocationDialogControllerProvider &&
+        other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$locationDialogControllerHash() =>
+    r'd29176fb61f682fa7f862c776c0953cbbc348cc9';
+
+final class LocationDialogControllerFamily extends $Family
+    with
+        $ClassFamilyOverride<
+          LocationDialogController,
+          String,
+          String,
+          String,
+          (String, String)
+        > {
+  LocationDialogControllerFamily._()
+    : super(
+        retry: null,
+        name: r'locationDialogControllerProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: false,
+      );
+
+  LocationDialogControllerProvider call(String episodeId, String locationId) =>
+      LocationDialogControllerProvider._(
+        argument: (episodeId, locationId),
+        from: this,
+      );
+
+  @override
+  String toString() => r'locationDialogControllerProvider';
+}
+
+abstract class _$LocationDialogController extends $Notifier<String> {
+  late final _$args = ref.$arg as (String, String);
+  String get episodeId => _$args.$1;
+  String get locationId => _$args.$2;
+
+  String build(String episodeId, String locationId);
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<String, String>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<String, String>,
+              String,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, () => build(_$args.$1, _$args.$2));
+  }
+}

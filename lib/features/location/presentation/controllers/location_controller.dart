@@ -1,9 +1,9 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:streets_sercets/core/utils/logger_utils.dart';
 
 import '../../../episode/presentation/controllers/episode_list_controller.dart';
 import '../../../game_state/presentation/controllers/game_state_controller.dart';
 import '../../domain/models/location.dart';
+import '../../../episode/domain/models/items_dialogs.dart';
 
 part 'location_controller.g.dart';
 
@@ -24,8 +24,6 @@ Future<List<GameLocation>> availableLocations(
   
   final unlockedLocations = <GameLocation>[];
   final availableButLockedLocations = <GameLocation>[];
-
-  AppLogger.warning(episode.bases.baseLocations.toString());
 
   for (final location in episode.bases.baseLocations) {
     if (unlockedLocationIds.contains(location.id)) {
@@ -60,4 +58,47 @@ bool isLocationUnlocked(
 ) {
   final unlockedLocationIds = ref.watch(unlockedLocationsProvider(episodeId));
   return unlockedLocationIds.contains(locationId);
+}
+
+@Riverpod(keepAlive: true)
+class LocationDialogController extends _$LocationDialogController {
+  @override
+  String build(String episodeId, String locationId) {
+    return ''; // Initial empty dialog
+  }
+
+  /// Get dialog for the location
+  Future<ItemDialog?> getLocationDialog() async {
+    final episode = await ref.read(episodeProvider(episodeId).future);
+    
+    // Find the location index
+    final locationIndex = episode.bases.baseLocations
+        .indexWhere((loc) => loc.id == locationId);
+    
+    if (locationIndex == -1) return null;
+
+    // Get the dialog ID from the first character (or you can modify this logic)
+    // This assumes we want the location's introduction dialog
+    // You might want to adjust this based on your game logic
+    final dialogId = episode.dialogsMatrices.getLocationDialog(0, locationIndex);
+    
+    if (dialogId != null) {
+      return episode.itemsDialogs.getLocationDialog(dialogId);
+    }
+
+    return null;
+  }
+
+  /// Show dialog and process it to unlock items
+  Future<void> showAndProcessLocationDialog() async {
+    final dialog = await getLocationDialog();
+
+    if (dialog != null) {
+      state = dialog.content;
+      
+      // Process dialog to unlock items
+      ref.read(gameStateControllerProvider(episodeId).notifier)
+          .processDialog(dialog);
+    }
+  }
 }

@@ -1,6 +1,6 @@
 abstract final class ApiConstants {
   static const String baseUrl = 'https://cdn.jsdelivr.net/gh/SkrybaOtis/strt_mstr_invests';
-  static const String tag = '@v1.1.5';
+  static const String tag = '@v1.1.7';
   static const String manifestEndpoint = '/episodes_manifest.json';
   static const String episodesPath = '/episodes';
   

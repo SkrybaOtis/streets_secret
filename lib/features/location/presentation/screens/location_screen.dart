@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:streets_sercets/features/episode/presentation/controllers/episode_list_controller.dart';
 
 import '../../../../core/constants/app_sizes.dart';
+import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/async_value_widget.dart';
 import '../../../../shared/widgets/app_button.dart';
 import '../../../../shared/widgets/branch_header.dart';
@@ -12,8 +14,10 @@ import '../../../character/presentation/widgets/character_choice.dart';
 import '../../../clue/presentation/controllers/clue_controller.dart';
 import '../../presentation/controllers/location_controller.dart';
 import '../../../case_files/presentation/widgets/element_card.dart';
+// import '../../../episode/domain/models/items_dialogs.dart';
 
-class LocationScreen extends ConsumerWidget {
+
+class LocationScreen extends ConsumerStatefulWidget {
   const LocationScreen({
     super.key,
     required this.episodeId,
@@ -24,12 +28,145 @@ class LocationScreen extends ConsumerWidget {
   final String locationId;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final locationAsync = ref.watch(locationProvider(episodeId, locationId));
-    final charactersAsync = ref.watch(
-      locationCharactersProvider(episodeId, locationId),
+  ConsumerState<LocationScreen> createState() => _LocationScreenState();
+}
+
+class _LocationScreenState extends ConsumerState<LocationScreen> {
+  bool _dialogShown = false;
+  @override
+  void initState() {
+    super.initState();
+    // Show dialog after the first frame
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _showLocationDialog();
+    });
+  }
+
+  Future<void> _showLocationDialog() async {
+    if (_dialogShown) return;
+    _dialogShown = true;
+
+    // Get the dialog controller
+    final dialogController = ref.read(
+      locationDialogControllerProvider(widget.episodeId, widget.locationId).notifier,
     );
-    final cluesAsync = ref.watch(locationCluesProvider(episodeId, locationId));
+
+    // Try to get the location dialog
+    final dialog = await dialogController.getLocationDialog();
+
+    if (dialog == null || !mounted) return;
+
+    // Show the dialog
+    await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => AlertDialog(
+        title: const Row(
+          children: [
+            Icon(Icons.location_on, color: AppColors.primary, size: 28),
+            SizedBox(width: AppSizes.paddingM),
+            Expanded(child: Text('Location Discovered')),
+          ],
+        ),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                dialog.content,
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              if (dialog.characters.isNotEmpty ||
+                  dialog.clues.isNotEmpty ||
+                  dialog.enigmas.isNotEmpty ||
+                  dialog.locations.isNotEmpty) ...[
+                const SizedBox(height: AppSizes.paddingL),
+                const Divider(),
+                const SizedBox(height: AppSizes.paddingS),
+                Text(
+                  'New items unlocked:',
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+                const SizedBox(height: AppSizes.paddingS),
+                if (dialog.characters.isNotEmpty)
+                  _buildUnlockedItem(
+                    context,
+                    Icons.person,
+                    '${dialog.characters.length} Character(s)',
+                    AppColors.characterTab,
+                  ),
+                if (dialog.clues.isNotEmpty)
+                  _buildUnlockedItem(
+                    context,
+                    Icons.search,
+                    '${dialog.clues.length} Clue(s)',
+                    AppColors.clueTab,
+                  ),
+                if (dialog.enigmas.isNotEmpty)
+                  _buildUnlockedItem(
+                    context,
+                    Icons.help_outline,
+                    '${dialog.enigmas.length} Enigma(s)',
+                    AppColors.enigmaTab,
+                  ),
+                if (dialog.locations.isNotEmpty)
+                  _buildUnlockedItem(
+                    context,
+                    Icons.place,
+                    '${dialog.locations.length} Location(s) available',
+                    AppColors.info,
+                  ),
+              ],
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              // Process the dialog to unlock items
+              dialogController.showAndProcessLocationDialog();
+              Navigator.of(context).pop();
+            },
+            child: const Text('Continue'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildUnlockedItem(
+    BuildContext context,
+    IconData icon,
+    String text,
+    Color color,
+  ) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: AppSizes.paddingXS),
+      child: Row(
+        children: [
+          Icon(icon, size: 20, color: color),
+          const SizedBox(width: AppSizes.paddingS),
+          Text(
+            text,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: color,
+                ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final locationAsync = ref.watch(locationProvider(widget.episodeId, widget.locationId));
+    final charactersAsync = ref.watch(
+      locationCharactersProvider(widget.episodeId, widget.locationId),
+    );
+    final cluesAsync = ref.watch(locationCluesProvider(widget.episodeId, widget.locationId));
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
 
@@ -92,8 +229,9 @@ class LocationScreen extends ConsumerWidget {
                               final character = characters[index];
                               return CharacterChoice(
                                 character: character,
+                                episodeId: widget.episodeId,
                                 onTap: () => context.push(
-                                  '/episode/$episodeId/character/${character.id}',
+                                  '/episode/${widget.episodeId}/character/${character.id}',
                                 ),
                               );
                             },
@@ -133,7 +271,7 @@ class LocationScreen extends ConsumerWidget {
                           ),
                           TextButton.icon(
                             onPressed: () => context.push(
-                              '/episode/$episodeId/location/$locationId/unlock-clue',
+                              '/episode/${widget.episodeId}/location/${widget.locationId}/unlock-clue',
                             ),
                             icon: const Icon(Icons.add, size: 18),
                             label: const Text('Add new'),
