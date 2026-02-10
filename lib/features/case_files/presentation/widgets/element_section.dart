@@ -10,12 +10,14 @@ class ElementSection extends StatelessWidget {
     required this.icon,
     required this.elements,
     required this.onElementTap,
+    required this.episodeId,
     this.selectedElementId,
   });
 
   final IconData icon;
   final List<ElementItem> elements;
   final void Function(int id) onElementTap;
+  final String episodeId;
   final int? selectedElementId;
 
   @override
@@ -57,6 +59,7 @@ class ElementSection extends StatelessWidget {
                         final element = elements[index];
                         return ElementCard(
                           name: element.name,
+                          episodeId: episodeId,
                           imageUrl: element.imageUrl,
                           isSelected: element.id == selectedElementId,
                           onTap: () => onElementTap(element.id),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:streets_sercets/features/episode/presentation/controllers/episode_list_controller.dart';
 
 import '../../../../core/constants/app_sizes.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -33,6 +32,7 @@ class LocationScreen extends ConsumerStatefulWidget {
 
 class _LocationScreenState extends ConsumerState<LocationScreen> {
   bool _dialogShown = false;
+
   @override
   void initState() {
     super.initState();
@@ -304,6 +304,7 @@ class _LocationScreenState extends ConsumerState<LocationScreen> {
                                 final clue = clues[index];
                                 return ElementCard(
                                   name: clue.name,
+                                  episodeId: widget.episodeId,
                                   imageUrl: clue.imageUrl,
                                   onTap: () {
                                     // Show clue details

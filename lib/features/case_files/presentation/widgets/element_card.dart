@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:streets_sercets/shared/widgets/element_image_widget.dart';
 
 import '../../../../core/constants/app_sizes.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -7,6 +8,7 @@ class ElementCard extends StatelessWidget {
   const ElementCard({
     super.key,
     required this.name,
+    required this.episodeId,
     required this.imageUrl,
     this.onTap,
     this.isSelected = false,
@@ -14,8 +16,10 @@ class ElementCard extends StatelessWidget {
 
   final String name;
   final String imageUrl;
+  final String episodeId;
   final VoidCallback? onTap;
   final bool isSelected;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -56,14 +60,21 @@ class ElementCard extends StatelessWidget {
                       top: Radius.circular(AppSizes.radiusM),
                     ),
                     child: imageUrl.isNotEmpty
-                        ? Image.asset(
-                            imageUrl,
-                            fit: BoxFit.cover,
-                            errorBuilder: (_, __, ___) => const Icon(
-                              Icons.image,
-                              size: AppSizes.iconL,
-                            ),
-                          )
+                        ? ElementImage(
+                          episodeId: episodeId,
+                          imageUrl: imageUrl,
+                          fit: BoxFit.cover,
+                          placeholder: const Icon(Icons.image, size: AppSizes.iconL),
+                        )
+
+                        // Image.asset(
+                        //     imageUrl,
+                        //     fit: BoxFit.cover,
+                        //     errorBuilder: (_, __, ___) => const Icon(
+                        //       Icons.image,
+                        //       size: AppSizes.iconL,
+                        //     ),
+                        //   )
                         : const Icon(
                             Icons.image,
                             size: AppSizes.iconL,

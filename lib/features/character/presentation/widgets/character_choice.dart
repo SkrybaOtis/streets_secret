@@ -1,12 +1,10 @@
-import 'dart:io';
+// import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:streets_sercets/core/utils/logger_utils.dart';
-import 'package:streets_sercets/features/get_episodes/data/services/storage_service.dart';
+// import 'package:streets_sercets/features/get_episodes/data/services/storage_service.dart';
 import 'package:streets_sercets/shared/widgets/episode_image_widget.dart';
 
-import '../../../../core/constants/app_dirs.dart';
 import '../../../../core/constants/app_sizes.dart';
 import '../../domain/models/character.dart';
 
@@ -112,18 +110,19 @@ class CharacterChoice extends ConsumerWidget {
   //   );
   // }
 
-  Future<File?> _getImageFile(WidgetRef ref) async {
-    try {
-      final storageService = ref.read(storageServiceProvider);
-      final installed = await storageService.loadInstalledEpisodes();
-      final episode = installed.findById(episodeId);
+  // Future<File?> _getImageFile(WidgetRef ref) async {
+  //   try {
+  //     final storageService = ref.read(storageServiceProvider);
+  //     final installed = await storageService.loadInstalledEpisodes();
+  //     final episode = installed.findById(episodeId);
+      
 
-      if (episode == null) return null;
+  //     if (episode == null) return null;
 
-      // Assuming character.imageUrl is like "character_1.png" or "images/character_1.png"
-      return storageService.getEpisodeImage(episode.localPath, character.imageUrl);
-    } catch (e) {
-      return null;
-    }
-  }
+  //     // Assuming character.imageUrl is like "character_1.png" or "images/character_1.png"
+  //     return storageService.getEpisodeImage(episode.localPath, character.imageUrl);
+  //   } catch (e) {
+  //     return null;
+  //   }
+  // }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/constants/app_sizes.dart';
+import '../../../../shared/widgets/element_image_widget.dart';
 import '../../domain/models/character.dart';
 import '../controllers/character_controller.dart';
 
@@ -40,14 +41,20 @@ class CharacterDialog extends ConsumerWidget {
           ),
           child: ClipOval(
             child: character.imageUrl.isNotEmpty
-                ? Image.asset(
-                    character.imageUrl,
-                    fit: BoxFit.cover,
-                    errorBuilder: (_, __, ___) => const Icon(
-                      Icons.person,
-                      size: 60,
-                    ),
-                  )
+                ? ElementImage(
+                  episodeId: episodeId,
+                  imageUrl: character.imageUrl,
+                  fit: BoxFit.cover,
+                  placeholder: const Icon(Icons.image, size: AppSizes.iconL),
+                )
+                // ? Image.asset(
+                //     character.imageUrl,
+                //     fit: BoxFit.cover,
+                //     errorBuilder: (_, __, ___) => const Icon(
+                //       Icons.person,
+                //       size: 60,
+                //     ),
+                //   )
                 : const Icon(
                     Icons.person,
                     size: 60,

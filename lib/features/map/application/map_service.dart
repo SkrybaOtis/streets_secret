@@ -98,8 +98,8 @@ class MapService {
         'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
 
     // Google Maps with marker label
-    final googleMapsWithLabel =
-        'https://www.google.com/maps/place/$latitude,$longitude';
+    // final googleMapsWithLabel =
+    //     'https://www.google.com/maps/place/$latitude,$longitude';
 
     // Standard geo URI (Android native)
     final geoUrl =

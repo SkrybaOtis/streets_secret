@@ -1,4 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:streets_sercets/features/episode/domain/enums/element_type.dart';
 
 import '../../../episode/presentation/controllers/episode_list_controller.dart';
 import '../../../game_state/presentation/controllers/game_state_controller.dart';
@@ -101,4 +102,59 @@ class LocationDialogController extends _$LocationDialogController {
           .processDialog(dialog);
     }
   }
+}
+
+// Remove the stateful controller, just use a method
+@riverpod
+Future<ItemDialog?> locationDialog(
+  Ref ref,
+  String episodeId,
+  String locationId,
+  ElementType elementType,
+  int elementId,
+) async {
+  final episode = await ref.watch(episodeProvider(episodeId).future);
+  
+  final locationIndex = int.parse(locationId) - 1;
+  final elementIndex = elementId - 1;
+
+  int? dialogId;
+
+  switch (elementType) {
+    case ElementType.character:
+      dialogId = episode.dialogsMatrices.getCharacterDialog(
+        locationIndex,
+        elementIndex,
+      );
+      if (dialogId != null) {
+        return episode.itemsDialogs.getCharacterDialog(dialogId);
+      }
+    case ElementType.clue:
+      dialogId = episode.dialogsMatrices.getClueDialog(
+        locationIndex,
+        elementIndex,
+      );
+      if (dialogId != null) {
+        return episode.itemsDialogs.getClueDialog(dialogId);
+      }
+    case ElementType.enigma:
+      dialogId = episode.dialogsMatrices.getEnigmaDialog(
+        locationIndex,
+        elementIndex,
+      );
+      if (dialogId != null) {
+        return episode.itemsDialogs.getEnigmaDialog(dialogId);
+      }
+    case ElementType.location:
+      dialogId = episode.dialogsMatrices.getLocationDialog(
+        locationIndex,
+        elementIndex,
+      );
+      if (dialogId != null) {
+        return episode.itemsDialogs.getLocationDialog(dialogId);
+      }
+    // ... rest of cases
+  }
+
+  return null;
 }

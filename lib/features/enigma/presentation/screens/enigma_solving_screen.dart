@@ -217,8 +217,8 @@ class EnigmaSolvingScreen extends ConsumerWidget {
     }
 
     // Get element details
-    String name = '';
-    String imageUrl = '';
+    // String name = '';
+    // String imageUrl = '';
 
     if (selectedElementType == ElementType.character) {
       final characterAsync =
@@ -227,6 +227,7 @@ class EnigmaSolvingScreen extends ConsumerWidget {
         value: characterAsync,
         data: (character) => ElementCard(
           name: character.name,
+          episodeId: episodeId,
           imageUrl: character.imageUrl,
           isSelected: true,
         ),
@@ -237,6 +238,7 @@ class EnigmaSolvingScreen extends ConsumerWidget {
         value: clueAsync,
         data: (clue) => ElementCard(
           name: clue.name,
+          episodeId: episodeId,
           imageUrl: clue.imageUrl,
           isSelected: true,
         ),

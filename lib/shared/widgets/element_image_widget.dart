@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../features/get_episodes/data/services/storage_service.dart';
 
-class EpisodeImage extends ConsumerWidget {
-  const EpisodeImage({
+class ElementImage extends ConsumerWidget {
+  const ElementImage({
     super.key,
     required this.episodeId,
     required this.imageUrl,

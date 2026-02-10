@@ -177,6 +177,7 @@ class _CharacterSection extends ConsumerWidget {
                 ))
             .toList(),
         onElementTap: onElementTap,
+        episodeId: episodeId,
         selectedElementId: selectedElementId,
       ),
       loading: () => const Center(child: CircularProgressIndicator()),
@@ -211,6 +212,7 @@ class _ClueSection extends ConsumerWidget {
                 ))
             .toList(),
         onElementTap: onElementTap,
+        episodeId: episodeId,
         selectedElementId: selectedElementId,
       ),
       loading: () => const Center(child: CircularProgressIndicator()),
@@ -245,6 +247,7 @@ class _EnigmaSection extends ConsumerWidget {
                 ))
             .toList(),
         onElementTap: onElementTap,
+        episodeId: episodeId,
         selectedElementId: selectedElementId,
       ),
       loading: () => const Center(child: CircularProgressIndicator()),

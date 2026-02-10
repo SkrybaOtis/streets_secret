@@ -6,6 +6,7 @@ import '../../../../core/constants/app_sizes.dart';
 import '../../../../core/widgets/async_value_widget.dart';
 import '../../../../shared/widgets/app_button.dart';
 import '../../../../shared/widgets/branch_header.dart';
+import '../../../../shared/widgets/element_image_widget.dart';
 import '../../../character/presentation/controllers/character_controller.dart';
 import '../../../clue/presentation/controllers/clue_controller.dart';
 import '../../../enigma/presentation/controllers/enigma_controller.dart';
@@ -79,17 +80,23 @@ class CaseFilesElementScreen extends ConsumerWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(AppSizes.radiusL),
                     child: element.imageUrl.isNotEmpty
-                        ? Image.asset(
-                            element.imageUrl,
-                            fit: BoxFit.cover,
-                            errorBuilder: (_, __, ___) => Icon(
-                              elementType == ElementType.character
-                                  ? Icons.person
-                                  : Icons.search,
-                              size: 64,
-                              color: Colors.grey,
-                            ),
-                          )
+                        ? ElementImage(
+                          episodeId: episodeId,
+                          imageUrl: element.imageUrl,
+                          fit: BoxFit.cover,
+                          placeholder: const Icon(Icons.image, size: AppSizes.iconL),
+                        )
+                          // Image.asset(
+                          //   element.imageUrl,
+                          //   fit: BoxFit.cover,
+                          //   errorBuilder: (_, __, ___) => Icon(
+                          //     elementType == ElementType.character
+                          //         ? Icons.person
+                          //         : Icons.search,
+                          //     size: 64,
+                          //     color: Colors.grey,
+                          //   ),
+                          // )
                         : Icon(
                             elementType == ElementType.character
                                 ? Icons.person
