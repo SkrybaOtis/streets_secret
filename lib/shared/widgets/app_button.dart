@@ -63,7 +63,8 @@ class AppButton extends StatelessWidget {
         button = ElevatedButton(
           onPressed: isLoading ? null : onPressed,
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.secondary,
+            foregroundColor: AppColors.backgroundDark,
+            backgroundColor: AppColors.background,
           ),
           child: buttonContent,
         );
@@ -74,6 +75,7 @@ class AppButton extends StatelessWidget {
         );
       case AppButtonType.text:
         button = TextButton(
+          style: ElevatedButton.styleFrom(foregroundColor: AppColors.onPrimary),
           onPressed: isLoading ? null : onPressed,
           child: buttonContent,
         );

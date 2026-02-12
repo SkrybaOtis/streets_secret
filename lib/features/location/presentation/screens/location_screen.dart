@@ -63,7 +63,7 @@ class _LocationScreenState extends ConsumerState<LocationScreen> {
       builder: (context) => AlertDialog(
         title: const Row(
           children: [
-            Icon(Icons.location_on, color: AppColors.primary, size: 28),
+            Icon(Icons.location_on, color: Colors.red, size: 28),
             SizedBox(width: AppSizes.paddingM),
             Expanded(child: Text('Location Discovered')),
           ],
@@ -124,13 +124,23 @@ class _LocationScreenState extends ConsumerState<LocationScreen> {
           ),
         ),
         actions: [
-          TextButton(
+          // TextButton(
+          //   onPressed: () {
+          //     // Process the dialog to unlock items
+          //     dialogController.showAndProcessLocationDialog();
+          //     Navigator.of(context).pop();
+          //   },
+          //   //style: ElevatedButton.styleFrom(foregroundColor: AppColors.onPrimary),
+          //   child: const Text('Continue'),
+          // ),
+          AppButton(
+            text: 'Continue',
             onPressed: () {
               // Process the dialog to unlock items
               dialogController.showAndProcessLocationDialog();
               Navigator.of(context).pop();
             },
-            child: const Text('Continue'),
+            type: AppButtonType.secondary,
           ),
         ],
       ),

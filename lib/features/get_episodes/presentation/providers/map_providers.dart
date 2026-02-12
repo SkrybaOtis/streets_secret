@@ -45,6 +45,33 @@ final currentLocationProvider = FutureProvider<LatLng?>((ref) async {
   }
 });
 
+/// Continuously streams the user's position with high accuracy.
+/// Updates every time the user moves at least 5 meters.
+/// Used by MapWidget to show a live user-location marker and proximity alerts.
+final livePositionProvider = StreamProvider<LatLng?>((ref) async* {
+  final permission = await ref.watch(locationPermissionProvider.future);
+
+  if (permission == LocationPermission.denied ||
+      permission == LocationPermission.deniedForever) {
+    yield null;
+    return;
+  }
+
+  final stream = Geolocator.getPositionStream(
+    locationSettings: const LocationSettings(
+      accuracy: LocationAccuracy.high,
+      distanceFilter: 5, // update every 5 metres moved
+    ),
+  );
+
+  await for (final position in stream) {
+    final latLng = LatLng(position.latitude, position.longitude);
+    // Keep the shared state in sync as well
+    ref.read(userLocationProvider.notifier).state = latLng;
+    yield latLng;
+  }
+});
+
 // ============================================================================
 // Map State
 // ============================================================================

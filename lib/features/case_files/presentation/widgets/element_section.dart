@@ -24,9 +24,11 @@ class ElementSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
-        borderRadius: BorderRadius.circular(AppSizes.radiusL),
-        border: Border.all(color: Colors.grey[300]!),
+        color: AppColors.yellowLight,
+        borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(AppSizes.radiusL),
+            ),
+        border: Border.all(color: AppColors.primary),
       ),
       child: Column(
         children: [

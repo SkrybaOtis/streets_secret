@@ -72,7 +72,7 @@ class LocationListScreen extends ConsumerWidget {
             child: AppButton(
               text: 'Go back',
               onPressed: () => context.pop(),
-              type: AppButtonType.outline,
+              type: AppButtonType.primary,
               isFullWidth: true,
             ),
           ),

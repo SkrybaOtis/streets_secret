@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:streets_sercets/core/theme/app_colors.dart';
 
 import '../../../../core/constants/app_sizes.dart';
 import '../../../../core/widgets/async_value_widget.dart';
@@ -110,7 +111,7 @@ class OpeningEpisodeScreen extends ConsumerWidget {
                       child: AppButton(
                         text: 'Go Back',
                         onPressed: () => context.go('/'),
-                        type: AppButtonType.outline,
+                        type: AppButtonType.primary,
                       ),
                     ),
                     const SizedBox(width: AppSizes.paddingM),
@@ -146,7 +147,7 @@ class OpeningEpisodeScreen extends ConsumerWidget {
       ),
       child: Row(
         children: [
-          Icon(icon, color: Theme.of(context).colorScheme.primary),
+          Icon(icon, color: AppColors.red),
           const SizedBox(width: AppSizes.paddingM),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 abstract class AppColors {
   // Primary colors
   static const Color primary = Color(0xFF2C3E50);
-  static const Color primaryLight = Color(0xFF34495E);
-  static const Color primaryDark = Color(0xFF1A252F);
+  static const Color primaryLight = Color(0xFF884411);
+  static const Color primaryDark = Color(0xFF884411);
 
   // Secondary colors
   static const Color secondary = Color(0xFFE74C3C);
@@ -20,6 +20,7 @@ abstract class AppColors {
   static const Color background = Color(0xFFFDFDFD);
   static const Color surface = Color(0xFFFFFFFF);
   static const Color surfaceVariant = Color(0xFFF5F5F5);
+  static const Color onPrimary = Color(0xFFF5F5F5);
   static const Color onBackground = Color(0xFF1A1A1A);
   static const Color onSurface = Color(0xFF2C2C2C);
 
@@ -35,9 +36,17 @@ abstract class AppColors {
   static const Color enigmaTab = Color(0xFFE67E22);
 
   // Dark theme colors
-  static const Color backgroundDark = Color(0xFF121212);
+  static const Color backgroundDark = Color(0xFF332211);
   static const Color surfaceDark = Color(0xFF1E1E1E);
-  static const Color surfaceVariantDark = Color(0xFF2C2C2C);
+  static const Color surfaceVariantDark = Color(0xFF442211);
   static const Color onBackgroundDark = Color(0xFFE0E0E0);
   static const Color onSurfaceDark = Color(0xFFD0D0D0);
+
+
+  // My palette
+  static const Color brown = Color(0xFF884411);
+  static const Color red = Color(0xFFAA2222);
+  static const Color green = Color(0xFF226622);
+  static const Color yellowLight = Color(0xFFFFFFBB);
+  static const Color onSuderfaceDark = Color(0xFFD0D0D0);
 }

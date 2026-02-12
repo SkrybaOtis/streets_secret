@@ -66,7 +66,7 @@ class LocationChoice extends StatelessWidget {
                       child: AppButton(
                         text: 'Navigate',
                         onPressed: onNavigate,
-                        type: AppButtonType.outline,
+                        type: AppButtonType.secondary,
                         icon: Icons.map,
                       ),
                     ),

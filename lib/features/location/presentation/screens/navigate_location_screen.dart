@@ -25,12 +25,6 @@ class NavigateLocationScreen extends ConsumerWidget {
     final locationAsync = ref.watch(locationProvider(episodeId, locationId));
 
     return Scaffold(
-      // appBar: AsyncValueWidget(
-      //   value: locationAsync,
-      //   data: (location) => BranchHeader(title: location.name),
-      //   loading: () => const BranchHeader(title: 'Loading...'),
-      //   error: (_, __) => const BranchHeader(title: 'Error'),
-      // ),
       appBar: locationAsync.when(
         data: (location) => BranchHeader(title: location.name),
         loading: () => const BranchHeader(title: 'Loading...'),
@@ -43,16 +37,18 @@ class NavigateLocationScreen extends ConsumerWidget {
             padding: AppSizes.screenPadding,
             child: Column(
               children: [
-                // Map widget
+                // Map widget — shows live user marker and proximity banner
                 Expanded(
                   child: MapWidget(
                     latitude: location.latitude,
                     longitude: location.longitude,
                     locationName: location.name,
+                    showCurrentLocation: true,
+                    proximityDescription: location.description,
                   ),
                 ),
                 const SizedBox(height: AppSizes.paddingM),
-                // Description
+                // Static description (always visible below the map)
                 Text(
                   location.description,
                   style: Theme.of(context).textTheme.bodyMedium,

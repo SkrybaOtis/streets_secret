@@ -177,14 +177,14 @@ class EpisodeInfoPopup extends StatelessWidget {
                     onPressed: onViewDetails,
                     child: const Text('Details'),
                   ),
-                if (onDownload != null) ...[
-                  const SizedBox(width: 8),
-                  ElevatedButton.icon(
-                    icon: const Icon(Icons.download, size: 16),
-                    label: Text(episode.formattedSize),
-                    onPressed: onDownload,
-                  ),
-                ],
+                // if (onDownload != null) ...[
+                //   const SizedBox(width: 8),
+                //   ElevatedButton.icon(
+                //     icon: const Icon(Icons.download, size: 16),
+                //     label: Text(episode.formattedSize),
+                //     onPressed: onDownload,
+                //   ),
+                // ],
               ],
             ),
           ],

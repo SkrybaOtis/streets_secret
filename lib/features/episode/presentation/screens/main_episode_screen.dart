@@ -112,9 +112,9 @@ class MainEpisodeScreen extends ConsumerWidget {
                   width: screenWidth * AppSizes.mainWidgetWidthFraction,
                   height: screenHeight * AppSizes.caseFilesWidgetHeightFraction,
                   decoration: BoxDecoration(
-                    color: Colors.brown[50],
+                    color: AppColors.yellowLight,
                     borderRadius: BorderRadius.circular(AppSizes.radiusM),
-                    border: Border.all(color: Colors.brown[200]!),
+                    border: Border.all(color: AppColors.yellowLight),
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -122,14 +122,14 @@ class MainEpisodeScreen extends ConsumerWidget {
                       Icon(
                         Icons.folder,
                         size: 64,
-                        color: Colors.brown[300],
+                        color: AppColors.primaryDark,
                       ),
                       const SizedBox(height: AppSizes.paddingM),
                       Text(
                         'Case Files',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                               fontWeight: FontWeight.w600,
-                              color: Colors.brown[700],
+                              color: AppColors.backgroundDark,
                             ),
                       ),
                       const SizedBox(height: AppSizes.paddingL),
@@ -148,7 +148,7 @@ class MainEpisodeScreen extends ConsumerWidget {
                 AppButton(
                   text: 'Go back',
                   onPressed: () => context.go('/'),
-                  type: AppButtonType.outline,
+                  type: AppButtonType.primary,
                   isFullWidth: true,
                 ),
               ],

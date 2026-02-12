@@ -30,11 +30,11 @@ class CaseFiles extends ConsumerWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: Colors.brown[100],
+        color: Colors.black.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(AppSizes.radiusL),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.1),
+            color: Colors.white.withValues(alpha: 0.1),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),

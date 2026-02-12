@@ -132,7 +132,7 @@ class CaseFilesElementScreen extends ConsumerWidget {
                 AppButton(
                   text: 'Go back',
                   onPressed: () => context.pop(),
-                  type: AppButtonType.outline,
+                  type: AppButtonType.secondary,
                   isFullWidth: true,
                 ),
               ],
@@ -212,7 +212,7 @@ class CaseFilesElementScreen extends ConsumerWidget {
                 AppButton(
                   text: 'Go back',
                   onPressed: () => context.pop(),
-                  type: AppButtonType.outline,
+                  type: AppButtonType.secondary,
                   isFullWidth: true,
                 ),
               ],

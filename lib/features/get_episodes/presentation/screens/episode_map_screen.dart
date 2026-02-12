@@ -87,7 +87,7 @@ class _EpisodeMapScreenState extends ConsumerState<EpisodeMapScreen> {
             children: [
               TileLayer(
                 urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                userAgentPackageName: 'com.example.investigation_game',
+                userAgentPackageName: "com.streets.mysteries.student.project",
               ),
               
               // Episode markers
@@ -129,6 +129,15 @@ class _EpisodeMapScreenState extends ConsumerState<EpisodeMapScreen> {
                 loading: () => const MarkerLayer(markers: []),
                 error: (_, __) => const MarkerLayer(markers: []),
               ),
+              RichAttributionWidget(
+                alignment: AttributionAlignment.bottomRight,
+                attributions: [
+                  TextSourceAttribution(
+                    'OpenStreetMap contributors',
+                    onTap: () {},
+                  ),
+                ],
+              ),
             ],
           ),
           
@@ -137,7 +146,7 @@ class _EpisodeMapScreenState extends ConsumerState<EpisodeMapScreen> {
             Positioned(
               left: 16,
               right: 16,
-              bottom: 16,
+              bottom: 40,
               child: EpisodeInfoPopup(
                 episode: _selectedEpisode!,
                 onViewDetails: () {
@@ -149,10 +158,6 @@ class _EpisodeMapScreenState extends ConsumerState<EpisodeMapScreen> {
                       ),
                     ),
                   );
-                },
-                onDownload: () {
-                  ref.read(downloadProgressProvider.notifier)
-                      .startDownload(_selectedEpisode!);
                 },
               ),
             ),

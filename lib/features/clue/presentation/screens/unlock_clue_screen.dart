@@ -62,7 +62,7 @@ class UnlockClueScreen extends ConsumerWidget {
               AppButton(
                 text: 'Go back',
                 onPressed: () => context.pop(),
-                type: AppButtonType.outline,
+                type: AppButtonType.secondary,
                 isFullWidth: true,
               ),
             ],
