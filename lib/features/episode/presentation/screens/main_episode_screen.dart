@@ -129,7 +129,7 @@ class MainEpisodeScreen extends ConsumerWidget {
                         'Case Files',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                               fontWeight: FontWeight.w600,
-                              color: AppColors.backgroundDark,
+                              color: Colors.black,
                             ),
                       ),
                       const SizedBox(height: AppSizes.paddingL),
