@@ -79,7 +79,7 @@ class CharacterScreen extends ConsumerWidget {
                 AppButton(
                   text: 'Go back',
                   onPressed: () => context.pop(),
-                  type: AppButtonType.outline,
+                  type: AppButtonType.primary,
                   isFullWidth: true,
                 ),
               ],

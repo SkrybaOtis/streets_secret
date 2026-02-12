@@ -62,7 +62,7 @@ class NavigateLocationScreen extends ConsumerWidget {
                       child: AppButton(
                         text: 'Go back',
                         onPressed: () => context.pop(),
-                        type: AppButtonType.outline,
+                        type: AppButtonType.primary,
                       ),
                     ),
                     const SizedBox(width: AppSizes.paddingM),

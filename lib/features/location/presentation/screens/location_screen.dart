@@ -279,12 +279,20 @@ class _LocationScreenState extends ConsumerState<LocationScreen> {
                                   fontWeight: FontWeight.w600,
                                 ),
                           ),
-                          TextButton.icon(
+                          // TextButton.icon(
+                          //   onPressed: () => context.push(
+                          //     '/episode/${widget.episodeId}/location/${widget.locationId}/unlock-clue',
+                          //   ),
+                          //   icon: const Icon(Icons.add, size: 18),
+                          //   label: const Text('Add new'),
+                          // ),
+                          AppButton(
+                            text: 'Add new', 
                             onPressed: () => context.push(
                               '/episode/${widget.episodeId}/location/${widget.locationId}/unlock-clue',
                             ),
-                            icon: const Icon(Icons.add, size: 18),
-                            label: const Text('Add new'),
+                            icon: Icons.add,
+                            type: AppButtonType.primary,
                           ),
                         ],
                       ),
@@ -337,7 +345,7 @@ class _LocationScreenState extends ConsumerState<LocationScreen> {
               AppButton(
                 text: 'Go back',
                 onPressed: () => context.pop(),
-                type: AppButtonType.outline,
+                type: AppButtonType.primary,
                 isFullWidth: true,
               ),
             ],
